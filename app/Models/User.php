@@ -20,6 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone', 
+        'address',
+        'role',
     ];
 
     /**
@@ -43,5 +46,39 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Relations
+
+    /**
+     * Un utilisateur peut avoir plusieurs commandes
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Un utilisateur peut avoir plusieurs produits (si marchand)
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Un utilisateur peut avoir plusieurs évaluations
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * Un utilisateur peut avoir plusieurs adresses
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 }
